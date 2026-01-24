@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import {
   Field,
   FieldDescription,
@@ -12,7 +13,7 @@ import Form from 'next/form';
 export default function Home() {
   return (
     <main className='w-full h-screen bg-gray-100 pt-16'>
-      <div className='mx-auto max-w-4xl bg-white pt-20 px-8 flex flex-col gap-16'>
+      <Card className='mx-auto max-w-4xl pt-20 px-8 flex flex-col gap-16'>
         <h1 className='text-2xl'>Upload an image you want to share</h1>
 
         <Form action={submitImage} className='flex flex-col gap-8 mb-8'>
@@ -38,7 +39,7 @@ export default function Home() {
           </FieldGroup>
           <Button type='submit'>Submit</Button>
         </Form>
-      </div>
+      </Card>
     </main>
   );
 }
