@@ -6,6 +6,7 @@ import {
   FieldLabel,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
+import { submitImage } from '@/lib/imageForm';
 import Form from 'next/form';
 
 export default function Home() {
@@ -14,7 +15,7 @@ export default function Home() {
       <div className='mx-auto max-w-4xl bg-white pt-20 px-8 flex flex-col gap-16'>
         <h1 className='text-2xl'>Upload an image you want to share</h1>
 
-        <Form action='/result' className='flex flex-col gap-8 mb-8'>
+        <Form action={submitImage} className='flex flex-col gap-8 mb-8'>
           <FieldGroup>
             <Field>
               <FieldLabel htmlFor='author'>Your name</FieldLabel>
