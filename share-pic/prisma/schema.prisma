@@ -17,5 +17,5 @@ model Image {
   id Int @id @default(autoincrement())
   author String
   description String?
-  createdAd DateTime @default(now())
+  createdAt DateTime @default(now())
 }

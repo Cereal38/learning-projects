@@ -2,11 +2,18 @@
 
 import { ImageFormData } from '@/models/imageFormData';
 import { FormEvent } from 'react';
+import { prisma } from './prisma';
 
 export async function submitImage(formData: FormData) {
   const imageFormData: ImageFormData = toImageFormData(formData);
 
-  console.log(imageFormData);
+  // Insert in db
+  await prisma.image.create({
+    data: {
+      author: imageFormData.author,
+      description: imageFormData.description,
+    },
+  });
 }
 
 function toImageFormData(formData: FormData): ImageFormData {
