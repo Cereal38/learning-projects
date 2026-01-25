@@ -21,3 +21,11 @@ Start the DB:
 ```bash
 docker start share-pic-db
 ```
+
+### Prisma
+
+When the schema has bean modified inside the prisma/schema.prisma file, run the following command. It will create the migration.
+
+```bash
+npx prisma migrate dev --name init
+```
