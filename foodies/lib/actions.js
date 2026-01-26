@@ -13,6 +13,19 @@ export async function shareMeal(formData) {
     creator_email: formData.get('email'),
   };
 
+  if (isInvalidText(meal.title)) throw new Error('Title required');
+  if (isInvalidText(meal.summary)) throw new Error('Summary required');
+  if (isInvalidText(meal.instructions))
+    throw new Error('Instructions required');
+  if (isInvalidText(meal.creator)) throw new Error('Creator required');
+  if (isInvalidText(meal.creator_email))
+    throw new Error('Creator email required');
+  if (!meal.image || meal.image.size === 0) throw new Error('Image required');
+
   await saveMeal(meal);
   redirect('/meals');
+}
+
+function isInvalidText(text) {
+  return !text || text.trim() === '';
 }
