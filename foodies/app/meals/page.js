@@ -1,28 +1,34 @@
-import Link from 'next/link'
-import classes from './page.module.css'
-import MealsGrid from '@/components/meals/meals-grid/meals-grid'
-import { getMeals } from '@/lib/meals'
+import Link from 'next/link';
+import classes from './page.module.css';
+import MealsGrid from '@/components/meals/meals-grid/meals-grid';
+import { getMeals } from '@/lib/meals';
 import { Suspense } from 'react';
 import LoadingMeals from './loading-meals';
+
+export const metadata = {
+  title: 'All meals',
+  description: 'Access a selection of best receipes',
+};
 
 async function Meals() {
   const meals = await getMeals();
 
-  return (
-    <MealsGrid meals={meals} />
-  )
+  return <MealsGrid meals={meals} />;
 }
 
 export default function MealsPage() {
-
-
   return (
     <>
       <header className={classes.header}>
-        <h1>Delicious meal, create <span className={classes.highlight}>by you</span></h1>
-        <p>Choose your favorite recipe and cook it yourself. It is easy and fun!</p>
+        <h1>
+          Delicious meal, create{' '}
+          <span className={classes.highlight}>by you</span>
+        </h1>
+        <p>
+          Choose your favorite recipe and cook it yourself. It is easy and fun!
+        </p>
         <p className={classes.cta}>
-          <Link href="/meals/share">Share Your Favorite Recipe</Link>
+          <Link href='/meals/share'>Share Your Favorite Recipe</Link>
         </p>
       </header>
       <main className={classes.main}>
@@ -31,5 +37,5 @@ export default function MealsPage() {
         </Suspense>
       </main>
     </>
-  )
+  );
 }
