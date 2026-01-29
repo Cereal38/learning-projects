@@ -1,10 +1,9 @@
-import Image from 'next/image'
-import classes from './page.module.css'
-import { getMeal } from '@/lib/meals'
+import Image from 'next/image';
+import classes from './page.module.css';
+import { getMeal } from '@/lib/meals';
 import { notFound } from 'next/navigation';
 
 export default async function MealDetailsPage({ params }) {
-
   const meal = await getMeal(params.slug);
 
   if (!meal) {
@@ -15,7 +14,7 @@ export default async function MealDetailsPage({ params }) {
     <>
       <header className={classes.header}>
         <div className={classes.image}>
-          <Image fill src={meal.image} />
+          <Image fill src={meal.image} alt='Meal' />
         </div>
         <div className={classes.headerText}>
           <h1>{meal.title}</h1>
@@ -26,11 +25,13 @@ export default async function MealDetailsPage({ params }) {
         </div>
       </header>
       <main>
-        <p className={classes.instructions} dangerouslySetInnerHTML={{
-          __html: meal.instructions.replace(/\n/g, '<br />')
-        }}>
-        </p>
+        <p
+          className={classes.instructions}
+          dangerouslySetInnerHTML={{
+            __html: meal.instructions.replace(/\n/g, '<br />'),
+          }}
+        ></p>
       </main>
     </>
-  )
+  );
 }
