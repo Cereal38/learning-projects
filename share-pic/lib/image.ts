@@ -1,10 +1,10 @@
 'use server';
 
-import { ImageFormData } from '@/models/imageFormData';
-import { FormEvent } from 'react';
+import { ImageFormData } from '@/models/image-form-data';
 import { prisma } from './prisma';
+import { ImageData } from '@/models/image-data';
 
-export async function submitImage(formData: FormData) {
+export async function postImage(formData: FormData) {
   const imageFormData: ImageFormData = toImageFormData(formData);
 
   // Insert in db
@@ -25,4 +25,21 @@ function toImageFormData(formData: FormData): ImageFormData {
     throw new Error('Invalid type for description');
 
   return { author, description };
+}
+
+export async function getImageById(id: string): Promise<ImageData | null> {
+  const numericId: number = Number(id);
+  if (!Number.isInteger(numericId)) {
+    throw new Error('Invalid id');
+  }
+
+  return prisma.image.findUnique({
+    where: { id: numericId },
+    select: {
+      id: true,
+      author: true,
+      description: true,
+      createdAt: true,
+    },
+  });
 }

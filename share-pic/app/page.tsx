@@ -7,9 +7,8 @@ import {
   FieldLabel,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { submitImage } from '@/lib/imageForm';
+import { postImage } from '@/lib/image';
 import Form from 'next/form';
-import { describe } from 'node:test';
 
 export const metadata = {
   title: 'SharePic form',
@@ -22,7 +21,7 @@ export default function Home() {
       <Card className='mx-auto max-w-4xl pt-20 px-8 flex flex-col gap-16'>
         <h1 className='text-2xl'>Upload an image you want to share</h1>
 
-        <Form action={submitImage} className='flex flex-col gap-8 mb-8'>
+        <Form action={postImage} className='flex flex-col gap-8 mb-8'>
           <FieldGroup>
             <Field>
               <FieldLabel htmlFor='author'>Your name</FieldLabel>
