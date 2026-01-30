@@ -9,6 +9,12 @@ import {
 import { Input } from '@/components/ui/input';
 import { submitImage } from '@/lib/imageForm';
 import Form from 'next/form';
+import { describe } from 'node:test';
+
+export const metadata = {
+  title: 'SharePic form',
+  describe: 'A form to share a picture in seconds',
+};
 
 export default function Home() {
   return (
@@ -21,7 +27,7 @@ export default function Home() {
             <Field>
               <FieldLabel htmlFor='author'>Your name</FieldLabel>
               <FieldDescription>
-                This is the which will be displayed next to the image.
+                This is the text which will be displayed next to the image.
               </FieldDescription>
               <Input id='author' name='author' autoComplete='off' />
             </Field>
