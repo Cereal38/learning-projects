@@ -40,7 +40,16 @@ export default function Home() {
               <Input id='description' name='description' autoComplete='off' />
             </Field>
 
-            {/* TODO: Add a picture upload feature here */}
+            <Field>
+              <FieldLabel htmlFor='picture'>Picture</FieldLabel>
+              <FieldDescription>Select an image to share.</FieldDescription>
+              <Input
+                id='picture'
+                name='description'
+                type='file'
+                accept='image/*'
+              />
+            </Field>
           </FieldGroup>
           <Button type='submit'>Submit</Button>
         </Form>

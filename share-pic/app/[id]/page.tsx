@@ -19,7 +19,7 @@ export default async function ImageDetailsPage({ params }: PageParams) {
     <main>
       <h1>An image by {imageData.author}</h1>
       <p>{imageData.description}</p>
-      <Link href='/'>You can submit your image too by clicking here</Link>
+      <Link href='/'>You can share an image by clicking here</Link>
     </main>
   );
 }

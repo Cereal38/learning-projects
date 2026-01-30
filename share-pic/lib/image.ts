@@ -19,12 +19,14 @@ export async function postImage(formData: FormData) {
 function toImageFormData(formData: FormData): ImageFormData {
   const author: unknown = formData.get('author');
   const description: unknown = formData.get('description');
+  const file: unknown = formData.get('file');
 
   if (typeof author !== 'string') throw new Error('Invalid type for author');
   if (typeof description !== 'string')
     throw new Error('Invalid type for description');
+  if (!(file instanceof File)) throw new Error('Invalid type for file');
 
-  return { author, description };
+  return { author, description, file };
 }
 
 export async function getImageById(id: string): Promise<ImageData | null> {
