@@ -41,14 +41,9 @@ export default function Home() {
             </Field>
 
             <Field>
-              <FieldLabel htmlFor='picture'>Picture</FieldLabel>
+              <FieldLabel htmlFor='file'>Picture</FieldLabel>
               <FieldDescription>Select an image to share.</FieldDescription>
-              <Input
-                id='picture'
-                name='description'
-                type='file'
-                accept='image/*'
-              />
+              <Input id='file' name='file' type='file' accept='image/*' />
             </Field>
           </FieldGroup>
           <Button type='submit'>Submit</Button>
