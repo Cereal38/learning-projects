@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import {
@@ -7,21 +9,26 @@ import {
   FieldLabel,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
+import { shareImage } from '@/lib/actions';
 import { postImage } from '@/lib/image';
 import Form from 'next/form';
+import { useActionState } from 'react';
 
-export const metadata = {
-  title: 'SharePic form',
-  describe: 'A form to share a picture in seconds',
-};
+// TODO: Not allowed in client component. Investigate how to fix this
+// export const metadata = {
+//   title: 'SharePic form',
+//   describe: 'A form to share a picture in seconds',
+// };
 
 export default function Home() {
+  const [actionState, formAction] = useActionState(shareImage, null);
+
   return (
     <main className='w-full h-screen bg-gray-100 pt-16'>
       <Card className='mx-auto max-w-4xl pt-20 px-8 flex flex-col gap-16'>
         <h1 className='text-2xl'>Upload an image you want to share</h1>
 
-        <Form action={postImage} className='flex flex-col gap-8 mb-8'>
+        <Form action={formAction} className='flex flex-col gap-8 mb-8'>
           <FieldGroup>
             <Field>
               <FieldLabel htmlFor='author'>Your name</FieldLabel>

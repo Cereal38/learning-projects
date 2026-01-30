@@ -4,9 +4,7 @@ import { ImageFormData } from '@/models/image-form-data';
 import { prisma } from './prisma';
 import { ImageData } from '@/models/image-data';
 
-export async function postImage(formData: FormData) {
-  const imageFormData: ImageFormData = toImageFormData(formData);
-
+export async function postImage(imageFormData: ImageFormData) {
   // Insert in db
   await prisma.image.create({
     data: {

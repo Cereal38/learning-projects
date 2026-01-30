@@ -1,5 +1,5 @@
 export interface ImageFormData {
   author: string;
-  description: string | undefined;
+  description?: string;
   file: File;
 }
