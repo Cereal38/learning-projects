@@ -3,8 +3,32 @@
 import { ImageFormData } from '@/models/image-form-data';
 import { prisma } from './prisma';
 import { ImageData } from '@/models/image-data';
+import { S3 } from '@aws-sdk/client-s3';
+import { randomUUID } from 'crypto';
 
 export async function postImage(imageFormData: ImageFormData) {
+  // TODO: Move it to somewhere else so we don't have to write it in any functions
+  const s3 = new S3({
+    region: process.env.AWS_REGION,
+    endpoint: process.env.AWS_ENDPOINT_URL,
+    credentials: {
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+    },
+    forcePathStyle: true, // Localstack usually needs this
+  });
+
+  // Insert file in s3 - Bufferize the file first
+  const arrayBuffer = await imageFormData.file.arrayBuffer();
+  const body = Buffer.from(arrayBuffer);
+  await s3.putObject({
+    Bucket: 'share-pic',
+    Key: `image-${randomUUID()}`,
+    Body: body,
+    ContentType: imageFormData.file.type,
+    ContentLength: body.length,
+  });
+
   // Insert in db
   await prisma.image.create({
     data: {
