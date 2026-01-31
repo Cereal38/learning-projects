@@ -32,10 +32,17 @@ npx prisma migrate dev --name init
 
 ### Manage the S3 bucket locally
 
-Run Localstack on your machine
+Run Localstack on your machine for the first time
 
 ```bash
-docker run --rm -it -p 4566:4566 -p 4510-4559:4510-4559 localstack/localstack
+# First time command
+docker run --name share-pic-s3 -it -p 4566:4566 -p 4510-4559:4510-4559 localstack/localstack
+```
+
+For the next time, just start the existing container
+
+```bash
+docker start -i share-pic-s3
 ```
 
 If not already done, install awslocal
