@@ -1,5 +1,7 @@
+import { Card } from '@/components/ui/card';
 import { getImageById } from '@/lib/image';
 import { ImageData } from '@/models/image-data';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -15,11 +17,26 @@ export default async function ImageDetailsPage({ params }: PageParams) {
     notFound();
   }
 
+  const imageUrl = `${process.env.AWS_ENDPOINT_URL}/share-pic/${imageData.fileKey}`;
+
   return (
-    <main>
-      <h1>An image by {imageData.author}</h1>
-      <p>{imageData.description}</p>
-      <Link href='/'>You can share an image by clicking here</Link>
+    <main className='w-full h-screen bg-gray-100 pt-16'>
+      <Card className='mx-auto max-w-4xl pt-20 px-8 flex flex-col'>
+        <h1>
+          An image by <span className='font-bold'>{imageData.author}</span>
+        </h1>
+        <p>{imageData.description}</p>
+        <div className='relative w-full h-96 bg-black'>
+          <Image
+            className='object-contain'
+            src={imageUrl}
+            fill
+            alt='Shared image'
+            unoptimized
+          />
+        </div>
+        <Link href='/'>You can share an image by clicking here</Link>
+      </Card>
     </main>
   );
 }
