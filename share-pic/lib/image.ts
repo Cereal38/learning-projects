@@ -21,9 +21,10 @@ export async function postImage(imageFormData: ImageFormData) {
   // Insert file in s3 - Bufferize the file first
   const arrayBuffer = await imageFormData.file.arrayBuffer();
   const body = Buffer.from(arrayBuffer);
+  const fileKey = `image-${randomUUID()}`;
   await s3.putObject({
     Bucket: 'share-pic',
-    Key: `image-${randomUUID()}`,
+    Key: fileKey,
     Body: body,
     ContentType: imageFormData.file.type,
     ContentLength: body.length,
@@ -34,6 +35,7 @@ export async function postImage(imageFormData: ImageFormData) {
     data: {
       author: imageFormData.author,
       description: imageFormData.description,
+      fileKey: fileKey,
     },
   });
 }
@@ -64,6 +66,7 @@ export async function getImageById(id: string): Promise<ImageData | null> {
       author: true,
       description: true,
       createdAt: true,
+      fileKey: true,
     },
   });
 }

@@ -3,4 +3,5 @@ export interface ImageData {
   author: string;
   description?: string | null;
   createdAt: Date;
+  fileKey: string;
 }

@@ -18,4 +18,5 @@ model Image {
   author String
   description String?
   createdAt DateTime @default(now())
+  fileKey String
 }
