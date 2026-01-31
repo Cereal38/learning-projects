@@ -29,3 +29,23 @@ When the schema has bean modified inside the prisma/schema.prisma file, run the 
 ```bash
 npx prisma migrate dev --name init
 ```
+
+### Manage the S3 bucket locally
+
+Run Localstack on your machine
+
+```bash
+docker run --rm -it -p 4566:4566 -p 4510-4559:4510-4559 localstack/localstack
+```
+
+If not already done, install awslocal
+
+```bash
+pip install awscli-local[ver1]
+```
+
+Then create the share-pic bucket
+
+```bash
+awslocal s3api create-bucket --bucket share-pic
+```
