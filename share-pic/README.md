@@ -24,10 +24,11 @@ docker start share-pic-db
 
 ### Prisma
 
-When the schema has bean modified inside the prisma/schema.prisma file, run the following command. It will create the migration.
+When the schema has bean modified inside the prisma/schema.prisma file, run the following commands. It will create the migration and regenerate the Prisma client.
 
 ```bash
-npx prisma migrate dev --name init
+npx prisma migrate dev --name <migration-name>
+npx prisma generate
 ```
 
 ### Manage the S3 bucket locally
