@@ -4,6 +4,7 @@ import { ImageData } from '@/models/image-data';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import CopyUrlButton from '@/components/forms/copy-url-button';
 
 type PageParams = {
   params: Promise<{ id: string }>;
@@ -35,6 +36,7 @@ export default async function ImageDetailsPage({ params }: PageParams) {
             unoptimized
           />
         </div>
+        <CopyUrlButton label='Copy share link' />
         <Link href='/'>You can share an image by clicking here</Link>
       </Card>
     </main>
