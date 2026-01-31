@@ -6,7 +6,7 @@ import { ImageData } from '@/models/image-data';
 import { S3 } from '@aws-sdk/client-s3';
 import { randomUUID } from 'crypto';
 
-export async function postImage(imageFormData: ImageFormData) {
+export async function postImage(imageFormData: ImageFormData): Promise<number> {
   // TODO: Move it to somewhere else so we don't have to write it in any functions
   const s3 = new S3({
     region: process.env.AWS_REGION,
@@ -31,13 +31,15 @@ export async function postImage(imageFormData: ImageFormData) {
   });
 
   // Insert in db
-  await prisma.image.create({
+  const { id } = await prisma.image.create({
     data: {
       author: imageFormData.author,
       description: imageFormData.description,
       fileKey: fileKey,
     },
   });
+
+  return id;
 }
 
 function toImageFormData(formData: FormData): ImageFormData {

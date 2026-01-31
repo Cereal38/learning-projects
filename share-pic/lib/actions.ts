@@ -1,6 +1,7 @@
 import { ImageFormData } from '@/models/image-form-data';
 import { z } from 'zod';
 import { postImage } from './image';
+import { redirect } from 'next/navigation';
 
 const imageDataFormSchema = z.object({
   author: z.string().trim().min(1, { message: 'Author is required' }).max(80),
@@ -21,7 +22,8 @@ const imageDataFormSchema = z.object({
 export async function shareImage(prevState: unknown, formData: FormData) {
   const imageFormData: ImageFormData = toImageFormData(formData);
 
-  await postImage(imageFormData);
+  const imageId = await postImage(imageFormData);
+  redirect(`/${imageId}`);
 }
 
 function toImageFormData(formData: FormData) {
