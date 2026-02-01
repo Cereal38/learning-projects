@@ -1,16 +1,34 @@
 import Image from 'next/image';
 import { Card, CardFooter, CardHeader, CardTitle } from './ui/card';
-import tshirtImg from '@/assets/tshirt.jpg';
 import { Button } from './ui/button';
+import { Item } from '@/models/item';
 
-export default function ItemCard() {
+interface ItemCardParams {
+  item: Item;
+}
+
+export default function ItemCard({ item }: ItemCardParams) {
   return (
     <Card className='w-64 p-4'>
-      <div className='relative h-32 w-full'>
-        <Image alt='tshirt' fill src={tshirtImg} />
+      <div className='relative h-32 w-full overflow-hidden rounded-md'>
+        {/* Blurred background layer */}
+        <Image
+          alt='tshirt background'
+          fill
+          src={item.imageUrl}
+          className='object-cover blur-2xl scale-100'
+          aria-hidden
+        />
+        {/* Foreground image */}
+        <Image
+          alt='tshirt'
+          fill
+          src={item.imageUrl}
+          className='object-contain'
+        />
       </div>
       <CardHeader>
-        <CardTitle>Tshirt</CardTitle>
+        <CardTitle>{item.label}</CardTitle>
       </CardHeader>
       <CardFooter>
         <Button className='w-full' variant='destructive'>
