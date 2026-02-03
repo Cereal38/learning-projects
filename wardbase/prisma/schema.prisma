@@ -5,10 +5,15 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../lib/generated/prisma"
+  provider = "prisma-client-js" // Was "prisma-client" before, but this setup require an output path
+  // output   = "../lib/generated/prisma" // We comment this out to avoid it to generate the client in a weird place
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+model Item {
+  id Int @id @default(autoincrement())
+  label String @db.VarChar(255)
 }

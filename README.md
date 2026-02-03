@@ -74,5 +74,8 @@ npm prisma init
 
 # Then edit the prisma/schema.prisma file to add data models
 # And run the migration/apply command (This command shouldn't be run in production!)
-npx prisma migrate dev --name init
+npx prisma migrate dev --name <migration-name>
+
+# And finally generate the prisma client
+npx prisma generate
 ```
