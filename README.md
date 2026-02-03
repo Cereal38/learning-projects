@@ -58,3 +58,21 @@ docker run -d  \
 # To start it next times
 docker start <container-name>
 ```
+
+Add prisma ORM to the project
+
+```bash
+# Install requires packages
+npm install prisma --save-dev
+npm install @prisma/client
+
+# Run the init command which creates schema.prisma and .env files
+npm prisma init
+
+# Update the .env file with the postgres db url
+# eg. DATABASE_URL="postgresql://postgres:postgres@localhost:5432/postgres"
+
+# Then edit the prisma/schema.prisma file to add data models
+# And run the migration/apply command (This command shouldn't be run in production!)
+npx prisma migrate dev --name init
+```
