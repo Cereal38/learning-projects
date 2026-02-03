@@ -1,6 +1,5 @@
 import AddItemDialog from '@/components/add-item-dialog';
 import ItemCard from '@/components/item-card';
-import { ItemFormData } from '@/models/item-form-data';
 import { Item } from '@prisma/client';
 
 export default function Home() {

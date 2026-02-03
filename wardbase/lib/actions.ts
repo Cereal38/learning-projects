@@ -1,4 +1,5 @@
-import { ItemFormData, ItemZodSchema } from '@/models/item-form-data';
+import { ItemZodSchema } from '@/validators/item-form-data';
+import { Prisma } from '@prisma/client';
 
 export async function addItem(prevState: unknown, formData: FormData) {
   const zodResult = ItemZodSchema.safeParse({
@@ -12,7 +13,7 @@ export async function addItem(prevState: unknown, formData: FormData) {
     throw new Error(errorMessage);
   }
 
-  const itemFormData: ItemFormData = zodResult.data;
+  const itemFormData: Prisma.ItemCreateInput = zodResult.data;
 
   console.log(itemFormData);
 }
