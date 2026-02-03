@@ -1,15 +1,15 @@
 import AddItemDialog from '@/components/add-item-dialog';
 import ItemCard from '@/components/item-card';
-import { Item } from '@/models/item';
+import { ItemFormData } from '@/models/item-form-data';
 import Image from 'next/image';
 
 export default function Home() {
-  const tshirtItem: Item = {
+  const tshirtItem: ItemFormData = {
     label: 'Tshirt tarpin bien',
     imageUrl: 'https://picsum.photos/200',
   };
 
-  const jacketItem: Item = {
+  const jacketItem: ItemFormData = {
     label: 'Veste de ski',
     imageUrl: 'https://picsum.photos/200',
   };

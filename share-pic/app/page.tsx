@@ -10,7 +10,6 @@ import {
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { shareImage } from '@/lib/actions';
-import { postImage } from '@/lib/image';
 import Form from 'next/form';
 import { useActionState } from 'react';
 

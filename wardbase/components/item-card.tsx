@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import { Card, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
-import { Item } from '@/models/item';
+import { ItemFormData } from '@/models/item-form-data';
 
 interface ItemCardParams {
-  item: Item;
+  item: ItemFormData;
 }
 
 export default function ItemCard({ item }: ItemCardParams) {
