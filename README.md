@@ -63,8 +63,10 @@ Add prisma ORM to the project
 
 ```bash
 # Install requires packages
-npm install prisma --save-dev
+npm install -D prisma
 npm install @prisma/client
+npm install @prisma/adapter-pg pg
+npm install -D @types/pg
 
 # Run the init command which creates schema.prisma and .env files
 npm prisma init
@@ -78,4 +80,30 @@ npx prisma migrate dev --name <migration-name>
 
 # And finally generate the prisma client
 npx prisma generate
+```
+
+Now we need to create the prisma.ts file
+
+```ts
+import { PrismaClient } from '@prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg';
+import { Pool } from 'pg';
+
+const globalForPrisma = globalThis as unknown as {
+  prisma?: PrismaClient;
+  pgPool?: Pool;
+};
+
+const pool =
+  globalForPrisma.pgPool ??
+  new Pool({ connectionString: process.env.DATABASE_URL });
+
+const adapter = new PrismaPg(pool);
+
+export const prisma = globalForPrisma.prisma ?? new PrismaClient({ adapter });
+
+if (process.env.NODE_ENV !== 'production') {
+  globalForPrisma.prisma = prisma;
+  globalForPrisma.pgPool = pool;
+}
 ```
