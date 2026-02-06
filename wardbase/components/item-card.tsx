@@ -8,24 +8,34 @@ interface ItemCardParams {
 }
 
 export default function ItemCard({ item }: ItemCardParams) {
+  const imageUrl: string | undefined = item.imageKey
+    ? `${process.env.AWS_ENDPOINT_URL}/wardbase/${item.imageKey}`
+    : undefined;
+
   return (
     <Card className='w-64 p-4'>
       <div className='relative h-32 w-full overflow-hidden rounded-md'>
-        {/* Blurred background layer */}
-        {/* <Image
-          alt='tshirt background'
-          fill
-          src={item.imageUrl}
-          className='object-cover blur-2xl scale-100'
-          aria-hidden
-        /> */}
-        {/* Foreground image */}
-        {/* <Image
-          alt='tshirt'
-          fill
-          src={item.imageUrl}
-          className='object-contain'
-        /> */}
+        {!!imageUrl && (
+          <>
+            {/* Blurred background layer */}
+            <Image
+              alt='background'
+              fill
+              src={imageUrl}
+              className='object-cover blur-2xl scale-100'
+              aria-hidden
+              unoptimized
+            />
+            {/* Foreground image */}
+            <Image
+              alt={item.label}
+              fill
+              src={imageUrl}
+              className='object-contain'
+              unoptimized
+            />
+          </>
+        )}
       </div>
       <CardHeader>
         <CardTitle>{item.label}</CardTitle>
