@@ -21,5 +21,4 @@ export async function addItem(prevState: unknown, formData: FormData) {
   const id: number = await postItem(itemInput);
 
   redirect('/');
-  return null;
 }

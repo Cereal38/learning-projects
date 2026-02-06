@@ -4,6 +4,7 @@ import { prisma } from './prisma';
 import { randomUUID } from 'node:crypto';
 import { uploadToBucket } from './s3';
 import { ItemInput } from '@/models/item-input';
+import { Item } from '@prisma/client';
 
 export async function postItem(itemInput: ItemInput): Promise<number> {
   // Bufferize the image and upload it to s3 (If image exists)
@@ -25,4 +26,8 @@ export async function postItem(itemInput: ItemInput): Promise<number> {
   });
 
   return id;
+}
+
+export async function getAllItems(): Promise<Item[]> {
+  return prisma.item.findMany();
 }
