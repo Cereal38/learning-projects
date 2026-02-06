@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState } from 'react';
+import { startTransition, useActionState, useCallback, useState } from 'react';
 import { Button } from './ui/button';
 import {
   Dialog,
@@ -17,12 +17,38 @@ import { Input } from './ui/input';
 import { Label } from './ui/label';
 import Form from 'next/form';
 import { addItem } from '@/lib/actions';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+
+const ADD_ITEM_PARAM = 'addItem';
 
 export default function AddItemDialog() {
   const [actionState, formAction] = useActionState(addItem, null);
 
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const isOpen = searchParams.get(ADD_ITEM_PARAM) === 'true';
+
+  const setIsOpen = useCallback(
+    (nextOpen: boolean) => {
+      const params = new URLSearchParams(searchParams.toString());
+
+      if (nextOpen) params.set(ADD_ITEM_PARAM, 'true');
+      else params.delete(ADD_ITEM_PARAM);
+
+      const qs = params.toString();
+      const nextUrl = qs ? `${pathname}?${qs}` : pathname;
+
+      startTransition(() => {
+        router.replace(nextUrl);
+      });
+    },
+    [router, pathname, searchParams]
+  );
+
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button>Add an item</Button>
       </DialogTrigger>
