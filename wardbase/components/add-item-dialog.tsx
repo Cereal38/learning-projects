@@ -12,7 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from './ui/dialog';
-import { Field, FieldDescription, FieldGroup, FieldLabel } from './ui/field';
+import { Field, FieldGroup, FieldLabel } from './ui/field';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import Form from 'next/form';
@@ -45,13 +45,13 @@ export default function AddItemDialog() {
               <Input id='image' name='image' type='file' accept='image/*' />
             </Field>
           </FieldGroup>
+          <DialogFooter className='pt-4'>
+            <DialogClose asChild>
+              <Button variant='outline'>Cancel</Button>
+            </DialogClose>
+            <Button type='submit'>Add</Button>
+          </DialogFooter>
         </Form>
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button variant='outline'>Cancel</Button>
-          </DialogClose>
-          <Button type='submit'>Add</Button>
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
