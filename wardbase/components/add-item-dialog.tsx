@@ -12,7 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from './ui/dialog';
-import { Field, FieldGroup, FieldLabel } from './ui/field';
+import { Field, FieldError, FieldGroup, FieldLabel } from './ui/field';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import Form from 'next/form';
@@ -39,10 +39,16 @@ export default function AddItemDialog() {
             <Field>
               <Label htmlFor='label'>Label</Label>
               <Input id='label' name='label' />
+              {actionState?.errors?.label && (
+                <FieldError>{actionState.errors.label[0]}</FieldError>
+              )}
             </Field>
             <Field>
               <FieldLabel htmlFor='image'>Image</FieldLabel>
               <Input id='image' name='image' type='file' accept='image/*' />
+              {actionState?.errors?.image && (
+                <FieldError>{actionState.errors.image}</FieldError>
+              )}
             </Field>
           </FieldGroup>
           <DialogFooter className='pt-4'>

@@ -10,13 +10,14 @@ export async function addItem(prevState: unknown, formData: FormData) {
   });
 
   if (!zodResult.success) {
-    const errorMessage = zodResult.error.issues
-      .map((issue) => issue.message)
-      .join('');
-    throw new Error(errorMessage);
+    return {
+      errors: zodResult.error.flatten().fieldErrors,
+    };
   }
 
   const itemInput: ItemInput = zodResult.data;
 
   const id: number = await postItem(itemInput);
+
+  return null;
 }
