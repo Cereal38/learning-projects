@@ -9,3 +9,18 @@ export const s3 = new S3({
   },
   forcePathStyle: true, // Localstack usually needs this
 });
+
+export async function uploadToBucket(
+  fileKey: string,
+  type: string,
+  body: Buffer<ArrayBuffer>,
+  bucketName: string
+) {
+  await s3.putObject({
+    Bucket: bucketName,
+    Key: fileKey,
+    Body: body,
+    ContentType: type,
+    ContentLength: body.length,
+  });
+}

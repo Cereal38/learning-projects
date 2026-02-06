@@ -1,10 +1,12 @@
 import { ItemZodSchema } from '@/validators/item-form-data';
 import { Prisma } from '@prisma/client';
 import { postItem } from './item';
+import { ItemInput } from '@/models/item-input';
 
 export async function addItem(prevState: unknown, formData: FormData) {
   const zodResult = ItemZodSchema.safeParse({
     label: formData.get('label'),
+    image: formData.get('image'),
   });
 
   if (!zodResult.success) {
@@ -14,7 +16,7 @@ export async function addItem(prevState: unknown, formData: FormData) {
     throw new Error(errorMessage);
   }
 
-  const itemInput: Prisma.ItemCreateInput = zodResult.data;
+  const itemInput: ItemInput = zodResult.data;
 
   const id: number = await postItem(itemInput);
 }

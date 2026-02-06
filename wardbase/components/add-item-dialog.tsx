@@ -12,7 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from './ui/dialog';
-import { Field, FieldGroup } from './ui/field';
+import { Field, FieldDescription, FieldGroup, FieldLabel } from './ui/field';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import Form from 'next/form';
@@ -40,10 +40,10 @@ export default function AddItemDialog() {
               <Label htmlFor='label'>Label</Label>
               <Input id='label' name='label' />
             </Field>
-            {/* <Field>
-              <Label htmlFor='username-1'>Username</Label>
-              <Input id='username-1' name='username' defaultValue='@peduarte' />
-            </Field> */}
+            <Field>
+              <FieldLabel htmlFor='image'>Image</FieldLabel>
+              <Input id='image' name='image' type='file' accept='image/*' />
+            </Field>
           </FieldGroup>
         </Form>
         <DialogFooter>

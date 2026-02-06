@@ -16,4 +16,5 @@ datasource db {
 model Item {
   id Int @id @default(autoincrement())
   label String @db.VarChar(255)
+  imageKey String?
 }
