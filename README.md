@@ -41,6 +41,34 @@ pip install awscli-local[ver1]
 
 # Then create a bucket
 awslocal s3api create-bucket --bucket <bucket-name>
+
+# Add the s3 package to the project
+npm install @aws-sdk/client-s3
+```
+
+We also need to add this to the .env
+
+```env
+AWS_ACCESS_KEY_ID=test
+AWS_SECRET_ACCESS_KEY=test
+AWS_REGION=us-east-1
+AWS_ENDPOINT_URL=http://localhost:4566
+```
+
+Then create a s3 file with this code inside
+
+```ts
+import { S3 } from '@aws-sdk/client-s3';
+
+const s3 = new S3({
+  region: process.env.AWS_REGION,
+  endpoint: process.env.AWS_ENDPOINT_URL,
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+  },
+  forcePathStyle: true, // Localstack usually needs this
+});
 ```
 
 Deploy a local postgres db
