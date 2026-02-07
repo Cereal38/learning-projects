@@ -1,3 +1,5 @@
+'use server';
+
 import { ItemZodSchema } from '@/validators/item-form-data';
 import { postItem } from './item';
 import { ItemInput } from '@/models/item-input';
