@@ -2,7 +2,7 @@ import { getAllItems } from '@/lib/item';
 import { Item } from '@prisma/client';
 import ItemCard from './item-card';
 
-export default async function ItemRow() {
+export default async function ItemCarousel() {
   const items: Item[] = await getAllItems();
 
   return (
