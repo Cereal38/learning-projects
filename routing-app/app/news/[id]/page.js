@@ -1,9 +1,5 @@
-'use client';
-
-import { useParams } from 'next/navigation';
-
-export default function NewsDetailsPage() {
-  const { id } = useParams();
+export default function NewsDetailsPage({ params }) {
+  const id = params.id;
 
   return (
     <main>
