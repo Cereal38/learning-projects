@@ -4,17 +4,17 @@ export default function NewsPage() {
   return (
     <main>
       <h1>News</h1>
-      <li>
-        <ul>
+      <ul className='news-list'>
+        <li>
           <Link href='/news/1'>Item 1</Link>
-        </ul>
-        <ul>
+        </li>
+        <li>
           <Link href='/news/2'>Item 2</Link>
-        </ul>
-        <ul>
+        </li>
+        <li>
           <Link href='/news/3'>Item 3</Link>
-        </ul>
-      </li>
+        </li>
+      </ul>
     </main>
   );
 }

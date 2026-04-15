@@ -4,16 +4,18 @@ export default function MainHeader() {
   return (
     <header id='main-header'>
       <div id='logo'>
-        <Link href='/'>Routing app</Link>
+        <Link href='/'>NextNews</Link>
       </div>
-      <ul>
-        <li>
-          <Link href='/'>Home</Link>
-        </li>
-        <li>
-          <Link href='/news'>News</Link>
-        </li>
-      </ul>
+      <nav>
+        <ul>
+          <li>
+            <Link href='/'>Home</Link>
+          </li>
+          <li>
+            <Link href='/news'>News</Link>
+          </li>
+        </ul>
+      </nav>
     </header>
   );
 }
