@@ -1,3 +1,4 @@
+import { DUMMY_NEWS } from '@/dummy-news';
 import Link from 'next/link';
 
 export default function NewsPage() {
@@ -5,15 +6,17 @@ export default function NewsPage() {
     <main>
       <h1>News</h1>
       <ul className='news-list'>
-        <li>
-          <Link href='/news/1'>Item 1</Link>
-        </li>
-        <li>
-          <Link href='/news/2'>Item 2</Link>
-        </li>
-        <li>
-          <Link href='/news/3'>Item 3</Link>
-        </li>
+        {DUMMY_NEWS.map((newsItem) => (
+          <li key={newsItem.id}>
+            <Link href={`/news/${newsItem.slug}`}>
+              <img
+                src={`/images/news/${newsItem.image}`}
+                alt={newsItem.title}
+              />
+              <span>{newsItem.title}</span>
+            </Link>
+          </li>
+        ))}
       </ul>
     </main>
   );
